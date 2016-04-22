@@ -33,19 +33,37 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    $rpt_items = [
+        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'About', 'url' => ['/site/about']],
+        ['label' => 'Contact', 'url' => ['/site/contact']],
+    ];
+    if (Yii::$app->user->isGuest) {
+        $rpt_items[] = ['label' => 'Sign Up', 'url' => ['/site/signup']];
+        $rpt_items[] = ['label' => 'Login', 'url' => ['/site/login']];
+    } else {
+        $rpt_items[] = ['label' => 'Logout('.Yii::$app->user->identity->username.')',
+            'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']];
+    }
+    
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $rpt_items,
+        /*
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Sign Up', 'url' => ['/site/signup']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => '<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login',
+                'items' => $rpt_items]
             ) : (
                 ['label' => 'Logout('.Yii::$app->user->identity->username.')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]
             )
         ],
+        */
+        'encodeLabels' => false,
     ]);
     NavBar::end();
     ?>

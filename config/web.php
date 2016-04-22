@@ -37,15 +37,14 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
-        /*
+        'db' => require(__DIR__ . '/db.php'),        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'My Home' => 'site/index'
             ],
-        ],
-        */
+        ],        
     ],
     'params' => $params,
 ];
